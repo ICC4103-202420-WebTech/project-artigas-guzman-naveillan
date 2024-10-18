@@ -1,0 +1,8 @@
+<%= form_with model: @course do |form| %>
+    <%= form.label :title, 'Titulo' %>
+    <%= form.text_field :title%>
+    <%= form.label :description, 'Description' %>
+    <%= form.text_field :description%>
+    <%= form.submit 'Guardar'%>
+    
+<%end%>

@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
   def create
     course = Course.new course_params
     if course.save
-      redirect_to course_path(course)
+      redirect_to course
     else
       redirect_to new_course_path
     end
@@ -25,12 +25,12 @@ class CoursesController < ApplicationController
     @course = Course.find params['id']
   end
 
-  def updated
+  def update
     course = Course.find params['id']
     if course.update course_params
-      redirect_to edit_course_path(course)
+      redirect_to course_path
     else
-      redirect_to courses_path, alert: "libro no se pudo actualizar"
+      redirect_to edit_courses_path(course), alert: "libro no se pudo actualizar"
     end
   end
 
@@ -42,8 +42,13 @@ class CoursesController < ApplicationController
 
   private 
   def course_params
-    params.require(:course).permit(:title, :description)
+    permitted_params = params.require(:course).permit(:title, :description, :teacher_id)
+    permitted_params[:teacher_id] = default_teacher_id if permitted_params[:teacher_id].nil?
+    permitted_params
   end
 
+  def default_teacher_id
+   1
+  end
 end
   

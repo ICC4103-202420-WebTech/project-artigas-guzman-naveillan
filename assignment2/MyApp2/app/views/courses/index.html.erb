@@ -9,10 +9,14 @@
           <div class="card-body">
             <h5 class="card-title"><%= course.title %></h5>
             <p class="card-text"><%= course.description %></p>
+            <%= link_to 'Editar', edit_course_path(course) %>
+            <%= link_to 'Eliminar', course_path(course), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
             <a href="<%= course_path(course) %>" class="btn btn-primary">View Course</a>
           </div>
         </div>
       </div>
     <% end %>
   </div>
+  <div class="row">
+    <%= link_to 'New Course', new_course_path, class: 'btn btn-primary' %>
 </div>
