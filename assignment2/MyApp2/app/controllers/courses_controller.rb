@@ -1,5 +1,4 @@
 class CoursesController < ApplicationController
-    
   def index
     @courses = Course.all
   end
@@ -43,12 +42,9 @@ class CoursesController < ApplicationController
   private 
   def course_params
     permitted_params = params.require(:course).permit(:title, :description, :teacher_id)
-    permitted_params[:teacher_id] = default_teacher_id if permitted_params[:teacher_id].nil?
-    permitted_params
+    permitted_params[:teacher_id] = current_user
+
   end
 
-  def default_teacher_id
-   1
-  end
 end
   
