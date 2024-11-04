@@ -1,4 +1,9 @@
 class CoursesController < ApplicationController
+
+  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]  
+  
+
   def index
     @courses = Course.all
   end
@@ -8,11 +13,11 @@ class CoursesController < ApplicationController
   end
 
   def new
-    @course = Course.new
+    @course = Course.new 
   end
 
   def create
-    course = Course.new course_params
+    course = current_user.courses.new(course_params)
     if course.save
       redirect_to course
     else
@@ -41,9 +46,8 @@ class CoursesController < ApplicationController
 
   private 
   def course_params
-    permitted_params = params.require(:course).permit(:title, :description, :teacher_id)
-    permitted_params[:teacher_id] = current_user
-
+    permitted_params = params.require(:course).permit(:title, :description)
+  
   end
 
 end
