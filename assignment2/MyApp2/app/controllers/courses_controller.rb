@@ -1,7 +1,13 @@
 class CoursesController < ApplicationController
 
-  before_action :authenticate_user!
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]  
+  #before_action :authenticate_user!
+  #before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]  
+  #en caso de no funcionar cancancan
+
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_course, only: [:show, :edit]
+  authorize_resource
+
   
 
   def index
@@ -49,6 +55,8 @@ class CoursesController < ApplicationController
     permitted_params = params.require(:course).permit(:title, :description)
   
   end
-
+  def set_course
+    @course = Course.find params['id']
+  end
 end
   
