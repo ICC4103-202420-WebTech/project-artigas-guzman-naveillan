@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-   root 'static_pages#index'
-   get 'courses', to: 'courses#index'
-   resources :courses
+  root 'static_pages#index'
+  get 'courses', to: 'courses#index'
+
+  resources :courses do
+   resources :lessons, except: [:index]
+  end
+  resources :lessons
 end

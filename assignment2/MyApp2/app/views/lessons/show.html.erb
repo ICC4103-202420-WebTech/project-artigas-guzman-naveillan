@@ -1,0 +1,15 @@
+<div class="container">
+    <h1><%= @lesson.title %></h1>
+
+    <p><strong>Content:</strong></p>
+    <p><%= @lesson.content %></p>
+
+    <p><strong>Lesson type:</strong> <%= @lesson.lesson_type %></p>
+
+    <p><strong>Curso:</strong> <%= link_to @lesson.course.title, course_path(@lesson.course) %></p>
+
+    <%= link_to 'Eliminar lección', lesson_path(@lesson), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
+    <%= link_to 'Editar lección', edit_course_lesson_path(@lesson.course, @lesson) %>
+    <%= link_to 'Volver a la lista de lecciones', course_path(@lesson.course) %> 
+
+</div>

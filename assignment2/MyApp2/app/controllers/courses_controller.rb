@@ -40,7 +40,7 @@ class CoursesController < ApplicationController
     if course.update course_params
       redirect_to course_path
     else
-      redirect_to edit_courses_path(course), alert: "libro no se pudo actualizar"
+      redirect_to edit_courses_path(course), alert: "curso no se pudo actualizar"
     end
   end
 

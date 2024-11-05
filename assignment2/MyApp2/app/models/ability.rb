@@ -12,6 +12,7 @@ class Ability
     if user.persisted? # Si el usuario está logueado
       # Permitir al usuario gestionar (editar, actualizar, borrar) solo los cursos que ha creado
       can :manage, Course, teacher_id: user.id
+      can :manage, Lesson, course: { teacher_id: user.id }
     end
   end
 end
