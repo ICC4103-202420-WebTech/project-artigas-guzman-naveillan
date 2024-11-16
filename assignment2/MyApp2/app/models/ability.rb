@@ -13,6 +13,7 @@ class Ability
       # Permitir al usuario gestionar (editar, actualizar, borrar) solo los cursos que ha creado
       can :manage, Course, teacher_id: user.id
       can :manage, Lesson, course: { teacher_id: user.id }
+      can :manage, Question, user_id: user.id
     end
   end
 end

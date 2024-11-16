@@ -8,8 +8,51 @@
 
     <p><strong>Curso:</strong> <%= link_to @lesson.course.title, course_path(@lesson.course) %></p>
 
-    <%= link_to 'Eliminar lección', lesson_path(@lesson), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
-    <%= link_to 'Editar lección', edit_course_lesson_path(@lesson.course, @lesson) %>
-    <%= link_to 'Volver a la lista de lecciones', course_path(@lesson.course) %> 
+    <% if user_signed_in?%>
+    <% if current_user.id == @lesson.course.teacher_id%>
+        <%= link_to 'Delete lesson', course_lesson_path(@lesson), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger'  %>
+        <%= link_to 'Edit lesson', edit_course_lesson_path(@lesson.course, @lesson), class: 'btn btn-warning' %>
+    <%end%>
+    <%end%>
+
+    <%= link_to 'Back to lessons', course_path(@lesson.course), class: 'btn btn-primary' %> 
+
+    <h2>Comments</h2>
+    <div class="row">
+        <div class="col">
+        <% @lesson.questions.each do |question| %>
+            <div class="card">
+                <div class="card-header">
+                    <p>@<%=question.user.name%></p>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                    <p><%=question.content%></p>
+                    <% if current_user == question.user%>
+                        <%= link_to 'Eliminar', course_lesson_question_path(course_id: @lesson.course.id, lesson_id: @lesson.id, id: question.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+                    <%end%>
+                    </blockquote>
+                </div>
+            </div>
+        <% end %>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+        <p></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+        <%= form_with(model: [@lesson, @lesson.questions.build], url: course_lesson_questions_path(@course, @lesson)) do |form| %>
+            <div class="mb-3">
+                <%= form.text_area :content, class: "form-control",placeholder: "new question" %>
+            </div>
+        <%= form.submit 'Post', class: "btn btn-primary" %>
+        <% end %>
+        </div>
+    </div>
 
 </div>

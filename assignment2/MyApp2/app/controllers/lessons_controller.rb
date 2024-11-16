@@ -1,13 +1,10 @@
 class LessonsController < ApplicationController
-
-  #before_action :authenticate_user!
-  #before_action :set_course
-  #before_action :authorize_teacher, only: [:new, :create, :edit, :update, :destroy]
   before_action :authenticate_user! , except: [:show]
   before_action :set_course, only: [:show, :edit]
 
   def show
     @lesson = Lesson.find params['id']
+    @questions = @lesson.questions
   end
 
   def new

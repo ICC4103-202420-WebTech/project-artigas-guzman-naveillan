@@ -2,7 +2,7 @@
     <h1><%=@course.title%></h1>
     <p><%=@course.description%></p>
     
-    <h2>Lecciones</h2>
+    <h2>Lessons</h2>
     <ul>
     <% @course.lessons.each do |lesson| %>
         <li>
@@ -10,7 +10,11 @@
         </li>
     <% end %>
     </ul>
+    <% if user_signed_in?%>
+    <% if current_user.id == @course.teacher_id%>
     <%= link_to 'New lesson', new_course_lesson_path(@course), class: 'btn btn-primary' %>
+    <%end%>
+    <%end%>
     <a href="<%= courses_path %>" class="btn btn-primary">Back</a>
 
 </div>

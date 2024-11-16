@@ -17,7 +17,10 @@ Rails.application.routes.draw do
   get 'courses', to: 'courses#index'
 
   resources :courses do
-   resources :lessons, except: [:index]
+   resources :lessons, except: [:index] do
+    resources :questions
+   end 
   end
-  resources :lessons
+
+  #resources :lessons
 end
