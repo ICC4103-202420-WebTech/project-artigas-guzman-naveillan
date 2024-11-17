@@ -3,7 +3,7 @@ class EnrollmentsController < ApplicationController
 
   def index
     @enrollments = current_user.enrollments
-    
+    @courses = current_user.courses
   end 
 
   def create
