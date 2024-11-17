@@ -37,7 +37,7 @@
 
                 <!-- Mostrar las respuestas asociadas -->
                 <div class="card-footer">
-                    <h5>Respuestas:</h5>
+                    <h5>Answers:</h5>
                     <% question.answers.each do |answer| %>
                         <div class="mb-2">
                             <strong>@<%= answer.user.name %>:</strong>
@@ -54,9 +54,9 @@
                     <% if user_signed_in? %>
                         <%= form_with(model: [@lesson.course, @lesson, question, Answer.new], local: true) do |form| %>
                             <div class="mb-3">
-                                <%= form.text_area :content, class: "form-control", placeholder: "Escribe una respuesta..." %>
+                                <%= form.text_area :content, class: "form-control", placeholder: "Write an answer..." %>
                             </div>
-                            <%= form.submit 'Responder', class: "btn btn-primary btn-sm" %>
+                            <%= form.submit 'Post', class: "btn btn-primary btn-sm" %>
                          <% end %>
                      <% end %>
                 </div>

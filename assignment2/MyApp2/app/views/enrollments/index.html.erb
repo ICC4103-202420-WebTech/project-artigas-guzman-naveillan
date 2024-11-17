@@ -1,0 +1,19 @@
+
+<div class="container">
+<h1>My inscriptions</h1>
+
+<div class="row">
+    <% @enrollments.each do |enrollment| %>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= enrollment.course.title %></h5>
+            <p class="card-text"><%= enrollment.course.description %></p>
+            <a href="<%= course_path(enrollment.course) %>" class="btn btn-primary">View Course</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+  

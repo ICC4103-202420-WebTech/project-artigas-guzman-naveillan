@@ -11,10 +11,21 @@
     <% end %>
     </ul>
     <% if user_signed_in?%>
-    <% if current_user.id == @course.teacher_id%>
-    <%= link_to 'New lesson', new_course_lesson_path(@course), class: 'btn btn-primary' %>
+        <% if current_user.id == @course.teacher_id%>
+            <%= link_to 'New lesson', new_course_lesson_path(@course), class: 'btn btn-primary' %>
+        <%end%>
     <%end%>
-    <%end%>
+
+    <% if user_signed_in? %>
+    <% if @course.students.include?(current_user) %>
+        <%= link_to 'Remove enrollment', course_enrollment_path(@course), data: { turbo_method: :delete,turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+    <% else %>
+        <%= link_to 'Enroll', course_enrollments_path(@course), data: { turbo_method: :post}, class: 'btn btn-primary' %>
+    <% end %>
+    <% else %>
+    <p>Log in to enroll in courses.</p>
+    <% end %>
+
     <a href="<%= courses_path %>" class="btn btn-primary">Back</a>
 
 </div>
