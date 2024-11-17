@@ -18,8 +18,10 @@ Rails.application.routes.draw do
 
   resources :courses do
    resources :lessons, except: [:index] do
-    resources :questions
-   end 
+    resources :questions do
+     resources :answers, only: [:create, :destroy]
+    end 
+   end
   end
 
   #resources :lessons

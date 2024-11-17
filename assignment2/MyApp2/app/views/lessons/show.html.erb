@@ -33,6 +33,33 @@
                     <%end%>
                     </blockquote>
                 </div>
+
+
+                <!-- Mostrar las respuestas asociadas -->
+                <div class="card-footer">
+                    <h5>Respuestas:</h5>
+                    <% question.answers.each do |answer| %>
+                        <div class="mb-2">
+                            <strong>@<%= answer.user.name %>:</strong>
+                            <p><%= answer.content %></p>
+                            <% if current_user == answer.user %>
+                               <%= link_to 'Eliminar', course_lesson_question_answer_path(course_id: @lesson.course.id, lesson_id: @lesson.id, question_id: question.id, id: answer.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger btn-sm' %>
+
+                
+
+                            <% end %>
+                        </div>
+                    <% end %>
+                    <!-- Formulario para responder -->
+                    <% if user_signed_in? %>
+                        <%= form_with(model: [@lesson.course, @lesson, question, Answer.new], local: true) do |form| %>
+                            <div class="mb-3">
+                                <%= form.text_area :content, class: "form-control", placeholder: "Escribe una respuesta..." %>
+                            </div>
+                            <%= form.submit 'Responder', class: "btn btn-primary btn-sm" %>
+                         <% end %>
+                     <% end %>
+                </div>
             </div>
         <% end %>
         </div>
