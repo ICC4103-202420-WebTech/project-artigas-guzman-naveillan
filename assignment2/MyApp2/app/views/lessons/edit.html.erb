@@ -28,11 +28,16 @@
     <%= form.text_field :lesson_type %>
   </div>
 
+  <div class="field">
+    <%= form.label :video_url, "YouTube Video URL" %>
+    <%= form.text_field :video_url %>
+  </div>
+
   <div>
-    <%= form.submit 'Actualizar lección' %>
+    <%= form.submit 'Update lesson' %>
   </div>
 <% end %>
 
-<%= link_to 'Volver al curso', course_path(@lesson.course) %>
+<%= link_to 'Back', course_path(@lesson.course) %>
 
 </div>

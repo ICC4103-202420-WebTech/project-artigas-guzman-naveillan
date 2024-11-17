@@ -22,7 +22,7 @@ class EnrollmentsController < ApplicationController
     @enrollment = Enrollment.find_by(user: current_user, course: @course)
 
     if @enrollment.destroy
-      redirect_to @course, notice: 'Course deleted.'
+      redirect_to enrollments_path, notice: 'Course deleted.'
     else
       redirect_to @course, alert: 'Error.'
     end

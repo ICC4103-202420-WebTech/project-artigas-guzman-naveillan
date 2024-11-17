@@ -25,6 +25,6 @@ Rails.application.routes.draw do
    end
   end
 
-  resources :enrollments, only: [:index]
-  #resources :lessons
+  resources :enrollments, only: [:index, :destroy]
+  resources :lessons
 end

@@ -15,6 +15,24 @@
     <%end%>
     <%end%>
 
+    <div class="row">
+        <div class="col">
+        <p></p>
+        </div>
+    </div>
+
+    <% if @lesson.video_url.present? %>
+    <div class="video">
+        <iframe width="560" height="315" src="<%= @lesson.video_url.gsub('watch?v=', 'embed/') %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <% end %>
+
+    <div class="row">
+        <div class="col">
+        <p></p>
+        </div>
+    </div>
+
     <%= link_to 'Back to lessons', course_path(@lesson.course), class: 'btn btn-primary' %> 
 
     <h2>Comments</h2>

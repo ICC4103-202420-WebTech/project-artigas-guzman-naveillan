@@ -10,6 +10,8 @@
             <h5 class="card-title"><%= enrollment.course.title %></h5>
             <p class="card-text"><%= enrollment.course.description %></p>
             <a href="<%= course_path(enrollment.course) %>" class="btn btn-primary">View Course</a>
+            
+            <%= link_to 'Remove enrollment', course_enrollment_path(enrollment.course, enrollment), data: { turbo_method: :delete,turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
           </div>
         </div>
       </div>
