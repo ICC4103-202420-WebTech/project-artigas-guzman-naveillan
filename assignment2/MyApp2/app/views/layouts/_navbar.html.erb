@@ -15,6 +15,13 @@
       </ul>
       <ul class="navbar-nav">
         <% if user_signed_in? %>
+
+          <li class="nav-item">
+            <div class="container">
+              <%= link_to 'New Course', new_course_path, class: 'btn btn-primary' %>
+            </div>
+          </li>
+
           <li class="nav-item">
             <%= link_to 'My courses', enrollments_path, class: 'nav-link' %>
           </li>

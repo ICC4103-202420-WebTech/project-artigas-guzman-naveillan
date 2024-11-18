@@ -1,14 +1,14 @@
 <div class="container">
     <h1><%= @lesson.title %></h1>
 
+    <p><strong>Lesson type:</strong> <%= @lesson.lesson_type %></p>
+
+    <p><strong>Course:</strong> <%= link_to @lesson.course.title, course_path(@lesson.course) %></p>
+
     <p><strong>Content:</strong></p>
     <div>
         <%= @lesson.content %>
     </div>
-
-    <p><strong>Lesson type:</strong> <%= @lesson.lesson_type %></p>
-
-    <p><strong>Course:</strong> <%= link_to @lesson.course.title, course_path(@lesson.course) %></p>
 
     <% if user_signed_in?%>
     <% if current_user.id == @lesson.course.teacher_id%>

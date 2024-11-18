@@ -3,6 +3,7 @@
 <h1>My inscriptions</h1>
 
 <div class="row">
+  <%if @enrollments.any?%>
     <% @enrollments.each do |enrollment| %>
       <div class="col-md-4">
         <div class="card">
@@ -16,21 +17,33 @@
         </div>
       </div>
     <% end %>
+  <%else%>
+    <p>No active enrollments...</p>
+  <%end%>
   </div>
 
 <h1>My courses</h1>
 <div class="row">
+  <%if @courses.any?%>
     <% @courses.each do |course| %>
       <div class="col-md-4">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><%= course.title %></h5>
             <p class="card-text"><%= course.description %></p>
-            <a href="<%= course_path(course) %>" class="btn btn-primary">View Course</a>            
+            <a href="<%= course_path(course) %>" class="btn btn-primary">View Course</a> 
+            <%= link_to 'Edit', edit_course_path(course) , class: 'btn btn-warning'%>
+            <%= link_to 'Delete', course_path(course), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } , class: 'btn btn-danger'%>           
           </div>
         </div>
       </div>
     <% end %>
+  <%else%>
+    <p>No created Courses...</p>
+  <%end%>
+  </div>
+  <div class="container">
+    <%= link_to 'New Course', new_course_path, class: 'btn btn-primary' %>
   </div>
 </div>
   

@@ -4,13 +4,11 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # usuario invitado (no logueado)
-
-    # Permitir a todos los usuarios leer cursos
+    user ||= User.new
+    
     can :read, Course
 
-    if user.persisted? # Si el usuario está logueado
-      # Permitir al usuario gestionar (editar, actualizar, borrar) solo los cursos que ha creado
+    if user.persisted?
       can :manage, Course, teacher_id: user.id
       can :manage, Lesson, course: { teacher_id: user.id }
       can :manage, Question, user_id: user.id
